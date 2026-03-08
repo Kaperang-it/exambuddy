@@ -738,8 +738,12 @@ function submitWaitlist(source) {
     return;
   }
 
-  // Сохраняем email локально (замените на реальный API когда будет готов)
-  // fetch('/api/waitlist', { method:'POST', body: JSON.stringify({email}), headers:{'Content-Type':'application/json'} })
+  // Отправка в Google Таблицу
+  fetch('https://script.google.com/macros/s/AKfycbwtmbL_dD7j_kkmO8-s2ZFXURl6pjV9S_aqsWEOMPWe7C0NqhsCBHFbUjANP-osNhlLxQ/exec', {
+    method: 'POST',
+    body: JSON.stringify({ email: email }),
+    headers: { 'Content-Type': 'application/json' }
+  }).catch(function() {});
   const isNew = saveEmail(email);
 
   // Если новый email — увеличиваем счётчик
